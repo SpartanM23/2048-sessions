@@ -5,7 +5,7 @@
 
 // return value if it's equal to 5 otherwise return 0
 int error1Function(int value){
-	if ((value = 5)){
+	if ((value == 5)){
 		return value;
 	}
 	return 0;
@@ -24,8 +24,10 @@ TEST(ex1, error1)
 
 // calculate square root of value
 // return if calcul have succeed
-bool error2Function(int value){
-	if (value == 0) return false;
+bool error2Function(int &value){
+	if (value == 0) {
+		return false;
+	}
 	value = sqrt(value);
 	return true;
 }
@@ -62,9 +64,12 @@ public:
 };
 
 // test if good conditions is here for writing code
-bool error3Function(Dog* dog, Human * human)
+bool error3Function(Dog* dog, Human* human)
 {
-	return false;
+	if (dog == NULL && human == NULL || dog != NULL && dog->wantToPlay() && human == NULL || dog != NULL && dog->wantToPlay() && human != NULL)
+		return false;
+	else if (dog != NULL && !dog->wantToPlay() && human != NULL  || dog == NULL && human != NULL)
+		return true;
 }
 
 // write error3Function content to match this test case
@@ -90,7 +95,11 @@ TEST(ex1, error3)
 // advanced (write a recursive function)
 int error4Function(int* array, int size)
 {
-	return 0;
+	int a = 0;
+	for (int i = 0;i < size;i++) {
+		a = a + array[i];
+	}
+	return a;
 }
 
 // write error4Function content to match this test case
